@@ -1,0 +1,47 @@
+#apDiv1 {
+	position:absolute;
+	width:1150px;
+	z-index:1;
+	left: 50px;
+	top: 100px;
+	background-color: #CCCCCC;
+    border: 1px solid #666666;
+}
+.STYLE1 {font-size: small}
+.STYLE2 {color: #FFFFFF}
+.added {background-color:#E6EFC2}
+.deleted {background-color:#FBE3E4}
+.updated {background-color:#E4F4FF}
+.no_change {background-color:#FFFFFF}
+.hide {display:none;}
+table {table-layout:fixed;}
+.canClick {cursor:pointer;}
+
+
+legend, label {
+	color: #333;
+}
+
+fieldset {
+	/*border-top: 1px solid #C9DCA6;*/
+}
+
+fieldset fieldset {
+	background: none;
+}
+
+fieldset p, fieldset fieldset {
+	padding: 5px 10px 7px;
+}
+
+label.error {
+	/* remove the next line when you have trouble in IE6 with labels in list */
+	color: red;
+	font-style: italic
+}
+div.error { display: none; }
+input {	border: 1px solid black; }
+input.checkbox { border: none }
+input:focus { border: 1px dotted black; }
+input.error { border: 1px dotted red; }
+.gray * { color: gray; }

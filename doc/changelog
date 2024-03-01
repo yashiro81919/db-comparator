@@ -1,0 +1,9 @@
+*some bugs in SqlServer driver, wait to update TODO 
+*add functionality to define SQL to compare data of tabla
+*fix NVARCHAR2 length issue on Oracle 
+
+2010-11-10:
+*complete functionality for Oracle and SqlServer
+
+2010-09-21:
+*migrate whole project from Java to Python

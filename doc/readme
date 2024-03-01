@@ -1,0 +1,14 @@
+Database Comparator Toolkit
+
+Technology:
+HTML，javascript，Python, RDBMS
+
+Third party opensource component:
+1.jQuery base on javascript, to create UI
+2.webpy is a Web framework base on Python
+3.cx_oracle is a Oracle Database Driver of Python
+4.pymssql is a SQLServer Database Driver of Python
+
+Functionality:
+1.Can compare objects of two Oracle schemas, Detail objects include:table, index, view, function, procedure, trigger, package, packageBody, sequence, materializedView
+2.Can compare objects of two SQLServer databases, Detail objects include:table, index, view, function, procedure, trigger

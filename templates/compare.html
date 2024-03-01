@@ -1,0 +1,77 @@
+$def with (result, compared_result=None)
+$code:
+    show_items = ['Table', 'Procedure', 'Function', 'View', 'Trigger']
+    show_objs = [result.tables, result.procedures, result.functions, result.views, result.triggers]
+    if result.db_type == 'oracle':
+        show_items += ['Package', 'Package Body', 'Sequence', 'Materialized View']
+        show_objs += [result.packages, result.package_bodies, result.sequences, result.materialized_views]
+    def count_diff_status(objects):
+        count = 0
+        for object in objects:
+            if object.status != 'no_change':
+                count += 1
+        return count
+    owner_desc = result.owner.host_name + ':' + result.owner.port + ':' + result.owner.db_name + ':' + result.owner.user_name
+    target_desc = result.target.host_name + ':' + result.target.port + ':' + result.target.db_name + ':' + result.target.user_name 
+
+<div id="apDiv1">
+    <table width="100%" border="1" cellpadding="5" cellspacing="0">
+        <tr align="center">
+            <td colspan="2">
+            $if compared_result == None:
+                <button type="button" onclick="doSavingResult()">
+                    <img src="static/img/add.png"/>Saving Result
+                </button>
+            $else:
+                Memo:$compared_result['MEMO']
+                Created Time:$compared_result['CREATED_TIME']
+            </td>
+        </tr>
+        <tr align="center">
+            <td width="50%">$owner_desc</td>
+            <td>$target_desc</td>
+        </tr>
+    $for item in show_items:
+        <tr align="center" class="canClick" onclick="toggleSource(this)">
+            <td colspan="2" bgcolor="#000066">
+                <span class="STYLE2">$item (Total $len(show_objs[loop.index0]) items) (Different $count_diff_status(show_objs[loop.index0]) items)</span>
+            </td>
+        </tr>
+        <tr class="hide">
+            <td colspan="2">
+                <table width="100%" height="100%" border="0">
+                $for sub_item in show_objs[loop.index0]:
+                    $if sub_item.status != 'no_change': 
+                        <tr align="center"
+                            class="$sub_item.status canClick"
+                            onclick="toggleSource(this)">
+                            <td>$sub_item.owner_name</td>
+                            <td>$sub_item.target_name</td>
+                        </tr>
+                        <tr class="hide">
+                            <td>
+                                <div style="overflow-x:auto;width:565px;">
+                                $for sub_item1 in sub_item.sr_list:
+                                    <div class="$sub_item1.status" style="width:20000px;">
+                                    $if sub_item1.owner_source.strip() == '':
+                                        &nbsp;
+                                    $:sub_item1.owner_source.replace(' ', '&nbsp;').decode('utf-8', 'ignore')</div>
+                                    <div class="no_change" style="width:20000px;"></div>
+                                </div>
+                            </td>                    
+                            <td>
+                                <div style="overflow-x:auto;width:565px;">
+                                $for sub_item1 in sub_item.sr_list:
+                                    <div class="$sub_item1.status" style="width:20000px;">
+                                    $if sub_item1.target_source.strip() == '':
+                                        &nbsp;
+                                    $:sub_item1.target_source.replace(' ', '&nbsp;').decode('utf-8', 'ignore')</div>
+                                    <div class="no_change" style="width:20000px;"></div>
+                                </div>
+                            </td>
+                        </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div> 

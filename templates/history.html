@@ -1,0 +1,29 @@
+$def with (results)
+
+<div id="apDiv1">
+    <form id="form1" name="form1" method="post">
+        <input type="hidden" name="id">
+        <table width="100%">
+            <thead>
+                <th>Action</th>
+                <th>Memo</th>
+                <th>Created Time</th>
+            </thead>
+            <tbody>
+            $for item in results:
+                <tr id="$item['ID']" align="center">
+                    <td>
+                        <button type="button" onclick="doViewDetailResult('$item['ID']')">
+                            <img src="static/img/add.png"/>View
+                        </button>
+                        <button type="button" onclick="doDeleteResult('$item['ID']')">
+                            <img src="static/img/delete.png"/>Delete
+                        </button>                    
+                    </td>
+                    <td>$item['MEMO']</td>
+                    <td>$item['CREATED_TIME']</td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</div>

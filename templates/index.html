@@ -1,0 +1,130 @@
+$def with (db_type, port, ds)
+$code:
+    sub_width = '35%'
+<script type="text/javascript">
+    $$(document).ready(function () {
+        $$("#form1").validate({
+            onsubmit:false
+        });
+        initDS('$:ds');
+        initPort('$port');
+        registerEvent('ownerDS');
+        registerEvent('targetDS');
+    });
+</script> 
+<div id="apDiv1">
+<form id="form1" name="form1" method="post">
+    <table width="100%" border="0">
+        <tr>
+            <td colspan="2" align="center">
+                <fieldset>
+                    <legend>Database Type</legend>
+                    <label><input name="db_type" type="radio" id="radio" value="oracle"
+                        $if db_type == 'oracle':checked="checked"	
+                        onclick="changeDBType()"/>Oracle</label>
+                    <label><input type="radio" name="db_type" id="radio2" value="sqlserver"
+                        $if db_type == 'sqlserver':checked="checked"	
+                        onclick="changeDBType()"/>Sqlserver</label>
+                </fieldset>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <fieldset>
+                    <legend>Original Database</legend>
+                    <table width="100%">
+                        <tr>
+                            <td width="$sub_width">Original DB DataSource:</td>
+                            <td>
+                                <select id="ownerDS">
+                                    <option value="">New DataSource</option>
+                                </select>
+                                <button type="button" onclick="doSave('ownerDS')">
+                                    <img src="static/img/add.png"/>Save
+                                </button>
+                                <button type="button" onclick="doDelete('ownerDS')">
+                                    <img src="static/img/delete.png"/>Delete
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="$sub_width">Original DB host:</td>
+                            <td><input type="text" name="owner_host_name" cssClass="{required:true}"/></td>
+                        </tr>
+                        <tr>
+                            <td width="$sub_width">Original DB name:</td>
+                            <td><input type="text" name="owner_db_name" cssClass="{required:true}"/></td>
+                        </tr>
+                        <tr>
+                            <td width="$sub_width">Original DB user:</td>
+                            <td><input type="text" name="owner_user_name" cssClass="{required:true}"/></td>
+                        </tr>
+                        <tr>
+                            <td width="$sub_width">Original DB password:</td>
+                            <td><input type="password" name="owner_password" cssClass="{required:true}"/></td>
+                        </tr>
+                        <tr>
+                            <td width="$sub_width">Original DB port:</td>
+                            <td><input type="text" name="owner_port" value="$port" cssClass="{required:true}"/></td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </td>
+            <td width="50%">
+                <fieldset>
+                    <legend>Target Database</legend>
+                    <table width="100%">
+                        <tr>
+                            <td width="$sub_width">Target DB DataSource:</td>
+                            <td>
+                                <select id="targetDS">
+                                    <option value="">New DataSource</option>
+                                </select>
+                                <button type="button" onclick="doSave('targetDS')">
+                                    <img src="static/img/add.png"/>Save
+                                </button>
+                                <button type="button" onclick="doDelete('targetDS')">
+                                    <img src="static/img/delete.png"/>Delete
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td width="$sub_width">Target DB host:</td>
+                            <td><input type="text" name="target_host_name" cssClass="{required:true}"/></td>
+                        </tr>
+                        <tr>
+                            <td width="$sub_width">Target DB name:</td>
+                            <td><input type="text" name="target_db_name" cssClass="{required:true}"/></td>
+                        </tr>
+                        <tr>
+                            <td width="$sub_width">Target DB user:</td>
+                            <td><input type="text" name="target_user_name" cssClass="{required:true}"/></td>
+                        </tr>
+                        <tr>
+                            <td width="$sub_width">Target DB password:</td>
+                            <td><input type="password" name="target_password" cssClass="{required:true}"/></td>
+                        </tr>
+                        <tr>
+                            <td width="$sub_width">Target DB port:</td>
+                            <td><input type="text" name="target_port" value="$port" cssClass="{required:true}"/></td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <button type="button" onclick="doCompare()">
+                    <img src="static/img/accept.png"/>Compare Structure
+                </button>
+                <button type="button" onclick="doCompareData()">
+                    <img src="static/img/accept.png"/>Compare Data
+                </button>
+                <button type="button" onclick="doView()">
+                    <img src="static/img/accept.png"/>View Result
+                </button>
+            </td>
+        </tr>
+    </table>
+</form>
+</div>   
